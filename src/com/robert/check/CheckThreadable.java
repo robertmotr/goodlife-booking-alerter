@@ -77,7 +77,9 @@ public class CheckThreadable extends Thread {
 
                 // notification
 
-                TrayIcon trayIcon = new TrayIcon(null, "Goodlife Booking Alerter has found something.");
+                Image image = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("/goodlife-logo.png"));
+
+                TrayIcon trayIcon = new TrayIcon(image,"Goodlife Booking Alerter has found something.");
 
                 tray.add(trayIcon);
 

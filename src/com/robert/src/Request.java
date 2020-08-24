@@ -117,6 +117,8 @@ public class Request {
         // Afternoon
         // Evening
 
+        System.out.println(pageSourceApi + "  pgsrc");
+
         InputStream inputStream = new ByteArrayInputStream(pageSourceApi.getBytes(StandardCharsets.UTF_8));
 
         InputStreamReader streamReader = new InputStreamReader(inputStream);
@@ -127,43 +129,71 @@ public class Request {
         JsonElement jsonElement = JsonParser.parseReader(jsonReader);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-        JsonArray jsonArray = new JsonArray();
-
-        switch(section) {
-
-            case "Morning":
+        switch (section) {
+            case "Morning" -> {
 
                 JsonArray jsonMorningArray = jsonObject.get("MorningList").getAsJsonArray();
-                jsonArray = jsonMorningArray;
-                break;
 
-            case "Afternoon" :
+                JsonElement jsonElement1 = jsonMorningArray.get(arrayIndex);
+
+                JsonObject jsonArrayObj = jsonElement1.getAsJsonObject();
+
+                String startAt = jsonArrayObj.get("StartAtDisplay").getAsString();
+                String endAt = jsonArrayObj.get("EndAtDisplay").getAsString();
+                int spotsAvailable = jsonArrayObj.get("SpotsAvailable").getAsInt();
+
+                Booking specificBooking = new Booking(startAt, endAt, spotsAvailable, arrayIndex);
+
+                this.specificBooking = specificBooking;
+
+                jsonReader.close();
+                streamReader.close();
+                inputStream.close();
+
+            }
+            case "Afternoon" -> {
 
                 JsonArray jsonAfternoonArray = jsonObject.get("AfternoonList").getAsJsonArray();
-                jsonArray = jsonAfternoonArray;
-                break;
 
-            case "Evening" :
+                JsonElement jsonElement1 = jsonAfternoonArray.get(arrayIndex);
+
+                JsonObject jsonArrayObj = jsonElement1.getAsJsonObject();
+
+                String startAt = jsonArrayObj.get("StartAtDisplay").getAsString();
+                String endAt = jsonArrayObj.get("EndAtDisplay").getAsString();
+                int spotsAvailable = jsonArrayObj.get("SpotsAvailable").getAsInt();
+
+                Booking specificBooking = new Booking(startAt, endAt, spotsAvailable, arrayIndex);
+
+                this.specificBooking = specificBooking;
+
+                jsonReader.close();
+                streamReader.close();
+                inputStream.close();
+
+            }
+            case "Evening" -> {
 
                 JsonArray jsonEveningArray = jsonObject.get("EveningList").getAsJsonArray();
-                jsonArray = jsonEveningArray;
-                break;
 
+                JsonElement jsonElement1 = jsonEveningArray.get(arrayIndex);
+
+                JsonObject jsonArrayObj = jsonElement1.getAsJsonObject();
+
+                String startAt = jsonArrayObj.get("StartAtDisplay").getAsString();
+                String endAt = jsonArrayObj.get("EndAtDisplay").getAsString();
+                int spotsAvailable = jsonArrayObj.get("SpotsAvailable").getAsInt();
+
+                Booking specificBooking = new Booking(startAt, endAt, spotsAvailable, arrayIndex);
+
+                this.specificBooking = specificBooking;
+
+                jsonReader.close();
+                streamReader.close();
+                inputStream.close();
+
+            }
         }
-
-        JsonObject jsonArrayObj = (JsonObject) jsonArray.get(arrayIndex);
-
-        String startAt = jsonArrayObj.get("StartAtDisplay").getAsString();
-        String endAt = jsonArrayObj.get("EndAtDisplay").getAsString();
-        int spotsAvailable = jsonArrayObj.get("SpotsAvailable").getAsInt();
-
-        Booking specificBooking = new Booking(startAt, endAt, spotsAvailable, arrayIndex);
-
-        this.specificBooking = specificBooking;
-
-        jsonReader.close();
-        streamReader.close();
-        inputStream.close();
 
     }
 

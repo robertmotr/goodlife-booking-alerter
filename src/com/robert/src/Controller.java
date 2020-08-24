@@ -420,7 +420,7 @@ public class Controller {
 
                     this.comboSelectTime.setItems(morningObservable);
 
-                    afternoonActive = true;
+                    eveningActive = true;
 
                     morningActive = false;
                     afternoonActive = false;

@@ -31,21 +31,21 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Button>
-      <Label fx:id="lblSelectDate" layoutX="2.0" layoutY="232.0" prefHeight="40.0" prefWidth="163.0" textAlignment="CENTER">
+      <Label fx:id="lblSelectDate" layoutX="2.0" layoutY="245.0" prefHeight="40.0" prefWidth="163.0" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <ComboBox fx:id="comboSelectSection" layoutX="168.0" layoutY="308.0" prefWidth="150.0" />
       <ComboBox fx:id="comboSelectTime" layoutX="168.0" layoutY="369.0" onShowing="#comboTimeSelected" prefWidth="150.0" />
       <Label fx:id="lblSelectSection" layoutX="2.0" layoutY="299.0" prefHeight="40.0" prefWidth="163.0" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblSelectTime" layoutX="2.0" layoutY="369.0" prefHeight="40.0" prefWidth="163.0" textAlignment="CENTER">
+      <Label fx:id="lblSelectTime" layoutX="2.0" layoutY="362.0" prefHeight="40.0" prefWidth="163.0" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <PasswordField fx:id="txtPassword" layoutX="189.0" layoutY="62.0" prefHeight="25.0" prefWidth="200.0" promptText="password here" style="-fx-background-radius: 15;" />
