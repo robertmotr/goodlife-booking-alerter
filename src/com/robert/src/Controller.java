@@ -46,7 +46,7 @@ public class Controller {
 
         options.addArguments("--headless");
 
-        ChromeDriver driver = new ChromeDriver();
+        ChromeDriver driver = new ChromeDriver(options);
 
         chromeDriver = driver;
 
