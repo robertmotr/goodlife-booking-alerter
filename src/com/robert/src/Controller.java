@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +34,7 @@ public class Controller {
         mainStage.setResizable(false);
         mainStage.setScene(new Scene(loader.load(), 485, 224));
         mainStage.setTitle("GoodLife Booking Alerter");
+        mainStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/goodlife-logo.png")));
 
         setVisibility(false);
 
