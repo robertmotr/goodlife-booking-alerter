@@ -171,8 +171,6 @@ public class Controller {
 
             this.clubNumber = clubNumber;
 
-            System.out.println(clubNumber); // for troubleshooting
-
             goToMainPage();
 
             ObservableList<String> sectionList = FXCollections.observableList(this.sectionList);
@@ -480,23 +478,15 @@ public class Controller {
 
         this.timeNow = this.timeNow.replaceAll("/", "-");
 
-        System.out.println(timeNow + "this is localdateformatter");
-
     }
 
     private void setNewDate() {
 
         // 2020-08-19 < example
 
-        System.out.println("this is old date" + timeNow);
-
         timeNow = timeNow.substring(0, 8);
 
-        System.out.println("time now with substringed" + timeNow);
-
         timeNow = timeNow + day;
-
-        System.out.println("time now with subtring and day added" + timeNow);
 
     }
 
@@ -544,8 +534,6 @@ public class Controller {
         // FIXME: 8/19/2020 create a more elegant solution than just waiting 5 seconds hoping the page loads
 
         String clubURL = chromeDriver.getCurrentUrl();
-
-        System.out.println(clubURL);
 
         return clubURL;
 
@@ -627,8 +615,6 @@ public class Controller {
     private void formGoodlifeApiRequest() {
 
         this.goodlifeApiRequest = GOODLIFE_URLS.URL_API_MAIN.getString() + clubNumber + GOODLIFE_URLS.URL_API_UNTIL_CLUB.getString() + this.timeNow + GOODLIFE_URLS.URL_API_END.getString();
-
-        System.out.println(goodlifeApiRequest);
 
     }
 

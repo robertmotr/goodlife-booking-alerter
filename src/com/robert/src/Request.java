@@ -117,8 +117,6 @@ public class Request {
         // Afternoon
         // Evening
 
-        System.out.println(pageSourceApi + "  pgsrc");
-
         InputStream inputStream = new ByteArrayInputStream(pageSourceApi.getBytes(StandardCharsets.UTF_8));
 
         InputStreamReader streamReader = new InputStreamReader(inputStream);
