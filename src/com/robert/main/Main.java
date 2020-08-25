@@ -11,9 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Controller main = new Controller();
-
-        this.controller = main;
+        this.controller = new Controller();
 
     }
 

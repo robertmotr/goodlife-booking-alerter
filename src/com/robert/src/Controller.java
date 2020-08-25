@@ -7,9 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.openqa.selenium.By;
@@ -17,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,7 +32,7 @@ public class Controller {
         mainStage.setResizable(false);
         mainStage.setScene(new Scene(loader.load(), 485, 224));
         mainStage.setTitle("GoodLife Booking Alerter");
-        mainStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/goodlife-logo.png")));
+        mainStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/com/robert/resources/goodlife-logo.png")));
 
         setVisibility(false);
 
@@ -78,7 +76,7 @@ public class Controller {
     private ArrayList<Booking> afternoonBookings;
     private ArrayList<Booking> eveningBookings;
 
-    private ArrayList<String> sectionList;
+    private final ArrayList<String> sectionList;
 
     private String goodlifeApiRequest;
 
@@ -92,15 +90,15 @@ public class Controller {
 
     private String timeNow;
 
-    private Stage mainStage;
+    private final Stage mainStage;
 
     private String email;
 
     private String password;
 
-    private String loginURL = GOODLIFE_URLS.URL_LOGIN.getString();
+    private final String loginURL = GOODLIFE_URLS.URL_LOGIN.getString();
 
-    private String goodlifeMainPage = GOODLIFE_URLS.URL_MAIN_PAGE.getString();
+    private final String goodlifeMainPage = GOODLIFE_URLS.URL_MAIN_PAGE.getString();
 
     private WebElement emailInput;
 
@@ -622,7 +620,7 @@ public class Controller {
 
         Request request = new Request();
 
-        this.request = request;
+        Controller.request = request;
 
     }
 

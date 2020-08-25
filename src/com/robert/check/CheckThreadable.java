@@ -12,7 +12,7 @@ public class CheckThreadable extends Thread {
     public CheckThreadable(Request requestInstance, int refreshRate, Booking booking, String goodlifeApiRequest, String section) {
 
         SystemTray tray = SystemTray.getSystemTray();
-        this.tray = tray;
+        CheckThreadable.tray = tray;
 
         request = requestInstance;
 
@@ -26,7 +26,7 @@ public class CheckThreadable extends Thread {
 
     }
 
-    private String section;
+    private final String section;
 
     private static Request request;
 
@@ -34,11 +34,11 @@ public class CheckThreadable extends Thread {
 
     private Boolean loopFlag = true;
 
-    private int refreshRate;
+    private final int refreshRate;
 
-    private Booking booking;
+    private final Booking booking;
 
-    private String goodlifeApiRequest;
+    private final String goodlifeApiRequest;
 
     @Override
     public void run() {
@@ -77,13 +77,15 @@ public class CheckThreadable extends Thread {
 
                 // notification
 
-                Image image = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("/goodlife-logo.png"));
+                Image image = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("/com/robert/resources/goodlife-logo.png"));
 
                 TrayIcon trayIcon = new TrayIcon(image,"Goodlife Booking Alerter has found something.");
 
                 tray.add(trayIcon);
 
                 trayIcon.displayMessage("Goodlife Booking Alerter has found something.", "A spot(s) is now available at your desired booking!", TrayIcon.MessageType.INFO);
+
+                System.exit(0);
 
             }
         }
