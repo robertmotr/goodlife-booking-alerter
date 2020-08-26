@@ -2,7 +2,6 @@ package com.robert.check;
 
 import com.robert.src.Booking;
 import com.robert.src.Request;
-import javafx.scene.control.Alert;
 
 import java.awt.*;
 import java.io.IOException;
@@ -59,18 +58,6 @@ public class CheckThreadable extends Thread {
     }
 
     private void checkStatus() throws InterruptedException, IOException, AWTException {
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-        alert.setTitle("Goodlife Booking Alerter is now tracking for changes.");
-
-        alert.setHeaderText("GBA is now looking for free spots.");
-
-        alert.setContentText("GBA is now looking for free spots for: \n" +
-                this.section + "\n" +
-                this.booking.getTotalTime());
-
-        alert.showAndWait();
 
         while(loopFlag) {
 

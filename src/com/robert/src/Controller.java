@@ -287,6 +287,17 @@ public class Controller {
 
             if(morningActive || afternoonActive || eveningActive) {
 
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                alert.setTitle("Goodlife Booking Alerter is now tracking for changes.");
+
+                alert.setHeaderText("GBA is now looking for free spots.");
+
+                alert.setContentText("GBA is now looking for free spots for: \n" +
+                        this.timeNow);
+
+                alert.showAndWait();
+
                 CheckThreadable checkThreadable = new CheckThreadable(request, refreshRate, booking, sectionValue);
 
                 checkThreadable.start();
