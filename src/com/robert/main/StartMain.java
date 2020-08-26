@@ -1,8 +1,9 @@
 package com.robert.main;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 
 public class StartMain {
 
@@ -20,9 +21,9 @@ public class StartMain {
 
     public static void setChromeDriver() throws IOException {
 
-        ClassLoader classLoader = StartMain.class.getClassLoader();
+        InputStream resource = StartMain.class.getResourceAsStream("/resources/lib/chromedriver/chromedriver.exe");
 
-        URL resource = classLoader.getResource("com/robert/lib/chromedriver/chromedriver.exe");
+        byte[] byteArray = resource.readAllBytes();
 
         File f = new File("Driver");
 
@@ -38,9 +39,14 @@ public class StartMain {
 
             chromeDriver.createNewFile();
 
-            org.apache.commons.io.FileUtils.copyURLToFile(resource, chromeDriver);
+            FileOutputStream fileOutputStream = new FileOutputStream(chromeDriver);
 
+            fileOutputStream.write(byteArray);
+
+            fileOutputStream.close();
         }
+
+        resource.close();
 
         chromeDriverFile = chromeDriver;
 
