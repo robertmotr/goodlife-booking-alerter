@@ -2,6 +2,7 @@ package com.robert.check;
 
 import com.robert.src.Booking;
 import com.robert.src.Request;
+import javafx.scene.control.Alert;
 
 import java.awt.*;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CheckThreadable extends Thread {
 
-    public CheckThreadable(Request requestInstance, int refreshRate, Booking booking, String goodlifeApiRequest, String section) {
+    public CheckThreadable(Request requestInstance, int refreshRate, Booking booking, String section) {
 
         SystemTray tray = SystemTray.getSystemTray();
         CheckThreadable.tray = tray;
@@ -19,8 +20,6 @@ public class CheckThreadable extends Thread {
         this.refreshRate = refreshRate;
 
         this.booking = booking;
-
-        this.goodlifeApiRequest = goodlifeApiRequest;
 
         this.section = section.strip();
 
@@ -37,8 +36,6 @@ public class CheckThreadable extends Thread {
     private final int refreshRate;
 
     private final Booking booking;
-
-    private final String goodlifeApiRequest;
 
     @Override
     public void run() {
@@ -62,6 +59,18 @@ public class CheckThreadable extends Thread {
     }
 
     private void checkStatus() throws InterruptedException, IOException, AWTException {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        alert.setTitle("Goodlife Booking Alerter is now tracking for changes.");
+
+        alert.setHeaderText("GBA is now looking for free spots.");
+
+        alert.setContentText("GBA is now looking for free spots for: \n" +
+                this.section + "\n" +
+                this.booking.getTotalTime());
+
+        alert.showAndWait();
 
         while(loopFlag) {
 

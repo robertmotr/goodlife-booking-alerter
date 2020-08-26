@@ -287,7 +287,7 @@ public class Controller {
 
             if(morningActive || afternoonActive || eveningActive) {
 
-                CheckThreadable checkThreadable = new CheckThreadable(request, refreshRate, booking, goodlifeApiRequest, sectionValue);
+                CheckThreadable checkThreadable = new CheckThreadable(request, refreshRate, booking, sectionValue);
 
                 checkThreadable.start();
 

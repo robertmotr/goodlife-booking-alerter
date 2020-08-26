@@ -8,16 +8,11 @@ public class StartMain {
 
     static File chromeDriverFile;
 
-    static File chromeFile;
-
     public static void main(String[] args) throws IOException {
 
         setChromeDriver();
-        setChrome();
 
         System.setProperty("webdriver.chrome.driver", chromeDriverFile.getAbsolutePath());
-        System.setProperty("webdriver.chrome.bin", chromeFile.getAbsolutePath());
-
 
         Main.main(args);
 
@@ -50,36 +45,4 @@ public class StartMain {
         chromeDriverFile = chromeDriver;
 
     }
-
-    public static void setChrome() throws IOException {
-
-        ClassLoader classLoader = StartMain.class.getClassLoader();
-
-        URL resource = classLoader.getResource("com/robert/lib/chrome/chrome.exe");
-
-        File f = new File("Chrome");
-
-        if (!f.exists()) {
-
-            f.mkdirs();
-
-        }
-
-        File chrome = new File("Chrome" + File.separator + "chrome.exe");
-
-        if (!chrome.exists()) {
-
-            chrome.createNewFile();
-
-            org.apache.commons.io.FileUtils.copyURLToFile(resource, chrome);
-
-        }
-
-        chromeFile = chrome;
-
-
-
-    }
-
-
 }
