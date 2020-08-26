@@ -16,4 +16,5 @@ GBA uses the following libraries and are packaged into the JAR:
 TO-DO:
 
 - Instead of freezing the Controller while the webdriver loads the page, implement a separate thread for the driver so that the Controller does not hang while it loads.
+- Restructure package access so that everything fits under com.robert
  
