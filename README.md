@@ -13,7 +13,7 @@ GBA uses the following libraries and are packaged into the JAR:
 - apache commons io (previously)
 - javafx 
 
-GBA also uses chrome which is packaged into the JAR as chromedriver.exe. Upon JAR execute, GBA will create a folder named "Driver" and unpack the chromedriver into that folder so that Java can run the executable. Chrome is used to search for web elements and interact with them, emulating a real user.
+GBA also uses chrome which is packaged into the JAR as chromedriver.exe. Upon JAR execute, GBA will create a folder named "Driver" within the current running directory and unpack the chromedriver into that folder so that Java can run the executable. Chrome is used to search for web elements and interact with them, emulating a real user.
 
 TO-DO:
 
