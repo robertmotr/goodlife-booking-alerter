@@ -4,8 +4,9 @@ Goodlife Booking Alerter is an automated bot that will check Goodlife Fitness fo
 In order to use GBA, your account must first be logged in within the program. At the moment, GBA will only alert you for one time slot, not multiple.
 
 Notes:
-- In order for GBA to function, you need the latest version of Chrome Beta/Chromium on your PC. 
-- past the login screen, the day number input field must be BEFORE the month you are currently in ends. (Goodlife updates their time slot API at the beginning of the month.)
+- In order for GBA to function, you need a specific version of Chrome that is specified on the Releases page. The Chrome version is related to the version of GBA.
+- GBA creates a folder to store data in the running directory that you execute the JAR file in. Since GBA does not have administrative privileges, the program will not work if you run it in a folder that requires superuser/administrative privileges, such as Program Files.
+- Past the login screen, the day number input field must be BEFORE the month you are currently in ends. (Goodlife updates their time slot API at the beginning of the month.)
 
 GBA uses the following libraries and are packaged into the JAR:
 
