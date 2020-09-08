@@ -20,8 +20,8 @@ public class Main extends Application {
 
         Alert Alert = new Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
 
-        Alert.setTitle("Goodlife Booking Alerter");
-        Alert.setHeaderText("Select where Chrome Beta/Chromium's chrome.exe is located.");
+        Alert.setTitle("Goodlife Booking Alerter:");
+        Alert.setHeaderText("Select where Chrome's chrome.exe is located.");
         Alert.setContentText("Ensure that the file location is not a shortcut but is inside its installation folder.");
         Alert.showAndWait();
 

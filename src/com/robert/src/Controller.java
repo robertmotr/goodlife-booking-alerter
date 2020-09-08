@@ -523,7 +523,7 @@ public class Controller {
 
         this.lblSelectSection.setText("Choose a section:");
 
-        this.lblSelectDate.setText("Choose a date before the end of the month:");
+        this.lblSelectDate.setText("Choose a day #:");
 
         this.lblRefreshRate.setText("Refresh rate (seconds):");
 

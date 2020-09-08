@@ -33,19 +33,19 @@
       </Button>
       <Label fx:id="lblSelectDate" layoutX="2.0" layoutY="245.0" prefHeight="40.0" prefWidth="163.0" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <ComboBox fx:id="comboSelectSection" layoutX="168.0" layoutY="308.0" prefWidth="150.0" />
       <ComboBox fx:id="comboSelectTime" layoutX="168.0" layoutY="369.0" onShowing="#comboTimeSelected" prefWidth="150.0" />
       <Label fx:id="lblSelectSection" layoutX="2.0" layoutY="299.0" prefHeight="40.0" prefWidth="163.0" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <Label fx:id="lblSelectTime" layoutX="2.0" layoutY="362.0" prefHeight="40.0" prefWidth="163.0" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <PasswordField fx:id="txtPassword" layoutX="189.0" layoutY="62.0" prefHeight="25.0" prefWidth="200.0" promptText="password here" style="-fx-background-radius: 15;" />
@@ -53,7 +53,7 @@
       <TextField fx:id="txtRefreshRate" layoutX="168.0" layoutY="428.0" prefHeight="25.0" prefWidth="150.0" promptText="refresh rate (in seconds)" />
       <Label fx:id="lblRefreshRate" layoutX="2.0" layoutY="421.0" prefHeight="40.0" prefWidth="163.0" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <Button fx:id="btnExit" layoutX="314.0" layoutY="480.0" mnemonicParsing="false" onAction="#btnExitClicked" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 30;" text="Exit">
