@@ -32,7 +32,7 @@ public class Controller {
         mainStage.setResizable(false);
         mainStage.setScene(new Scene(loader.load(), 485, 224));
         mainStage.setTitle("GoodLife Booking Alerter");
-        mainStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/com/robert/resources/images/goodlife-logo.png")));
+        mainStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/resources/images/goodlife-logo.png")));
 
         setVisibility(false);
 
