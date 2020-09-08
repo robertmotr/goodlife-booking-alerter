@@ -1,7 +1,5 @@
 # goodlife
 
-# goodlife
-
 Goodlife Booking Alerter is an automated bot that will check Goodlife Fitness for booking time slots and whether they are available or not. 
 In order to use GBA, your account must first be logged in within the program. At the moment, GBA will only alert you for one time slot, not multiple.
 
