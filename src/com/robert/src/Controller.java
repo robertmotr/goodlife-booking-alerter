@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 public class Controller {
 
-    public Controller() throws IOException {
+    public Controller(File chromeBinary) throws IOException {
 
         Stage mainStage = new Stage();
 
@@ -43,6 +44,8 @@ public class Controller {
         displayGeneralInformation();
 
         ChromeOptions options = new ChromeOptions();
+
+        options.setBinary(chromeBinary);
 
         options.addArguments("--headless");
 
@@ -165,9 +168,7 @@ public class Controller {
 
             String clubUrl = getClubUrl();
 
-            int clubNumber = getClubNumber(clubUrl);
-
-            this.clubNumber = clubNumber;
+            this.clubNumber = getClubNumber(clubUrl);
 
             goToMainPage();
 

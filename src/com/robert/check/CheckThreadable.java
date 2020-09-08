@@ -73,13 +73,15 @@ public class CheckThreadable extends Thread {
 
                 // notification
 
-                Image image = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("/com/robert/resources/images/goodlife-logo.png"));
+                Image image = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("/com/com.robert/resources/images/goodlife-logo.png"));
 
-                TrayIcon trayIcon = new TrayIcon(image,"Goodlife Booking Alerter has found something.");
+                TrayIcon trayIcon = new TrayIcon(image);
+
+                trayIcon.setImageAutoSize(true);
 
                 tray.add(trayIcon);
 
-                trayIcon.displayMessage("Goodlife Booking Alerter has found something.", "A spot(s) is now available at your desired booking!", TrayIcon.MessageType.INFO);
+                trayIcon.displayMessage("Goodlife Booking Alerter has found something.", "A spot(s) is now available at your desired booking!", TrayIcon.MessageType.NONE);
 
                 System.exit(0);
 
