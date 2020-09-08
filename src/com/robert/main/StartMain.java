@@ -9,9 +9,13 @@ public class StartMain {
 
     static File chromeDriverFile;
 
+    static File chromeBinFile;
+
     public static void main(String[] args) throws IOException {
 
         setChromeDriver();
+
+        setChrome();
 
         System.setProperty("webdriver.chrome.driver", chromeDriverFile.getAbsolutePath());
 
@@ -21,7 +25,7 @@ public class StartMain {
 
     public static void setChromeDriver() throws IOException {
 
-        InputStream resource = StartMain.class.getResourceAsStream("/resources/lib/chromedriver/chromedriver.exe");
+        InputStream resource = StartMain.class.getResourceAsStream("/com/robert/resources/lib/chromedriver/chromedriver.exe");
 
         byte[] byteArray = resource.readAllBytes();
 
@@ -49,6 +53,42 @@ public class StartMain {
         resource.close();
 
         chromeDriverFile = chromeDriver;
+
+    }
+
+    public static void setChrome() throws IOException {
+
+        InputStream resource = StartMain.class.getResourceAsStream("/com/robert/resources/lib/chromebin/chrome.exe");
+
+        byte[] byteArray = resource.readAllBytes();
+
+        File f = new File("ChromeBin");
+
+        if (!f.exists()) {
+
+            f.mkdirs();
+
+        }
+
+        File chromeBin = new File("ChromeBin" + File.separator + "chrome.exe");
+
+        if (!chromeBin.exists()) {
+
+            chromeBin.createNewFile();
+
+            FileOutputStream fileOutputStream = new FileOutputStream(chromeBin);
+
+            fileOutputStream.write(byteArray);
+
+            fileOutputStream.close();
+        }
+
+        resource.close();
+
+        chromeBinFile = chromeBin;
+
+
+
 
     }
 }
