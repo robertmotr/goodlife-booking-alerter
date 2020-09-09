@@ -25,7 +25,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Controller {
 
@@ -60,7 +59,7 @@ public class Controller {
 
             options.setBinary(chromeBinary);
 
-            // options.addArguments("--headless");
+            options.addArguments("--headless");
 
             ChromeDriver driver = new ChromeDriver(options);
 
