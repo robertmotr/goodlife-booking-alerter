@@ -3,6 +3,7 @@ package com.robert.src;
 import com.robert.check.CheckThreadable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,16 +11,21 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Controller {
 
@@ -35,6 +41,7 @@ public class Controller {
         mainStage.setTitle("GoodLife Booking Alerter");
         mainStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/com/robert/resources/images/goodlife-logo.png")));
 
+        pgrsCredentials.setVisible(false);
         setVisibility(false);
 
         mainStage.show();
@@ -43,17 +50,27 @@ public class Controller {
 
         displayGeneralInformation();
 
-        ChromeOptions options = new ChromeOptions();
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-        options.setBinary(chromeBinary);
+        this.executorService = executorService;
+        
+        executorService.submit(() -> {
 
-        options.addArguments("--headless");
+            ChromeOptions options = new ChromeOptions();
 
-        ChromeDriver driver = new ChromeDriver(options);
+            options.setBinary(chromeBinary);
 
-        chromeDriver = driver;
+            // options.addArguments("--headless");
 
-        driver.get(loginURL);
+            ChromeDriver driver = new ChromeDriver(options);
+
+            chromeDriver = driver;
+
+            driver.get(loginURL);
+
+            chromeDriver = driver;
+
+        });
 
         initializeRequest();
 
@@ -66,6 +83,8 @@ public class Controller {
         this.sectionList = sectionList;
 
     }
+
+    private final ExecutorService executorService;
 
     private Boolean morningActive;
     private Boolean afternoonActive;
@@ -139,7 +158,11 @@ public class Controller {
 
     @FXML private Button btnSubmitInfo;
 
+    @FXML private ProgressIndicator pgrsCredentials;
+
     @FXML private void btnSubmitClicked() throws Exception {
+
+        pgrsCredentials.setVisible(true);
 
         this.email = txtEmail.getText();
 
@@ -149,48 +172,111 @@ public class Controller {
 
         enterCredentials(this.email, this.password);
 
-        Thread.sleep(5000);
+        Task<Boolean> loginTask = new Task<>() {
 
-        // FIXME: 8/19/2020 create a more elegant solution than just waiting for 5 seconds hoping the page loads
+            @Override
+            protected Boolean call() {
 
-        if(chromeDriver.getCurrentUrl().equals(goodlifeMainPage)) { // successfully logged in, redirects to main page
+                boolean currentState;
 
-            lblCredentialDisplay.setText("Succesfully got to main page.");
+                try {
 
-            // resize the scene to display the rest of the components
+                    WebDriverWait wait = new WebDriverWait(chromeDriver, 5);
+                    wait.until(WebDriver::getCurrentUrl).equals(goodlifeMainPage);
+                    currentState = true;
 
-            setVisibility(true);
+                }
 
-            displayLabels();
+                catch(TimeoutException e) {
 
-            this.mainStage.setWidth(485);
-            this.mainStage.setHeight(589);
+                    currentState = false;
 
-            String clubUrl = getClubUrl();
+                }
+
+                return currentState;
+
+            }
+        };
+
+        Task<String> clubUrlTask = new Task<>() {
+
+            @Override
+            protected String call() throws Exception {
+
+                return getClubUrl();
+
+            }};
+
+        clubUrlTask.setOnSucceeded(e -> {
+
+            String clubUrl = clubUrlTask.getValue();
 
             this.clubNumber = getClubNumber(clubUrl);
 
-            goToMainPage();
+        });
 
-            ObservableList<String> sectionList = FXCollections.observableList(this.sectionList);
+        loginTask.setOnSucceeded(evt -> {
 
-            comboSelectSection.setItems(sectionList);
+            Boolean currentState = loginTask.getValue();
 
-        }
+            if(currentState) { // successfully logged in, redirects to main page
 
-        else {
+                lblCredentialDisplay.setText("Succesfully got to main page.");
 
-            setVisibility(false);
+                // resize the scene to display the rest of the components
 
-            lblCredentialDisplay.setText("Error! Incorrect credentials.");
+                setVisibility(true);
 
-            displayIncorrectCredentials();
+                displayLabels();
 
-            lblCredentialDisplay.setText("");
+                this.mainStage.setWidth(485);
+                this.mainStage.setHeight(589);
 
-            eraseLoginDetails();
+                // String clubUrl = null;
+                // try {
+                //    clubUrl = getClubUrl();
+                //} catch (InterruptedException e) {
+                //  e.printStackTrace();
+                // }
 
-        }
+                // this.clubNumber = getClubNumber(clubUrl);
+
+                goToMainPage();
+
+                ObservableList<String> sectionList = FXCollections.observableList(this.sectionList);
+                comboSelectSection.setItems(sectionList);
+
+            }
+
+            else {
+
+                setVisibility(false);
+
+                lblCredentialDisplay.setText("Error! Incorrect credentials.");
+
+                displayIncorrectCredentials();
+
+                lblCredentialDisplay.setText("");
+
+                eraseLoginDetails();
+
+            }
+
+            pgrsCredentials.setVisible(false);
+
+            executorService.submit(clubUrlTask);
+
+
+        });
+
+        loginTask.setOnRunning(evt -> {
+
+            pgrsCredentials.setVisible(true);
+
+        });
+
+        executorService.submit(loginTask);
+
     }
 
     @FXML private void btnStartTrackingClicked() throws IOException {
@@ -466,15 +552,15 @@ public class Controller {
 
     private void enterCredentials(String email, String password) {
 
-        this.emailInput.click();
+            this.emailInput.click();
 
-        this.emailInput.sendKeys(email);
+            this.emailInput.sendKeys(email);
 
-        this.passwordInput.click();
+            this.passwordInput.click();
 
-        this.passwordInput.sendKeys(password);
+            this.passwordInput.sendKeys(password);
 
-        this.confirmButton.click();
+            this.confirmButton.click();
 
     }
 
@@ -529,7 +615,7 @@ public class Controller {
 
     }
 
-    private String getClubUrl() throws InterruptedException {
+    private String getClubUrl() throws InterruptedException{
 
         WebElement clubUpcomingClasses = chromeDriver.findElement(By.className("club-upcoming-classes"));
 
@@ -541,11 +627,7 @@ public class Controller {
 
         Thread.sleep(5000);
 
-        // FIXME: 8/19/2020 create a more elegant solution than just waiting 5 seconds hoping the page loads
-
-        String clubURL = chromeDriver.getCurrentUrl();
-
-        return clubURL;
+        return chromeDriver.getCurrentUrl();
 
     }
 
@@ -565,21 +647,25 @@ public class Controller {
 
     private void getLoginElements() {
 
-        WebElement input = chromeDriver.findElement(By.className("ls"));
+        // WebElement authContainer = chromeDriver.findElement(By.id("auth-container"));
 
-        WebElement inputBox = input.findElement(By.className("login-input-container"));
+        // WebElement authForm = authContainer.findElement(By.className("auth-form"));
 
-        WebElement emailInput = inputBox.findElement(By.name("Email/Member #"));
+        // WebElement input = chromeDriver.findElement(By.className("ls"));
 
-        WebElement passwordInput = inputBox.findElement(By.name("Password"));
+        // WebElement inputBox = input.findElement(By.className("login-input-container"));
+
+        WebElement emailInput = chromeDriver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div[1]/div[1]/div[1]/input"));
+
+        WebElement passwordInput = chromeDriver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div[1]/div[1]/div[2]/input"));
 
         // login containers
 
-        WebElement loginConfirmContainer = input.findElement(By.className("login-confirm-container"));
+        // WebElement loginConfirmContainer = input.findElement(By.className("login-confirm-container"));
 
-        WebElement loginBtnContainer = loginConfirmContainer.findElement(By.className("login-btn-container"));
+        // WebElement loginBtnContainer = loginConfirmContainer.findElement(By.className("login-btn-container"));
 
-        WebElement confirmButton = loginBtnContainer.findElement(By.id("btn-login"));
+        WebElement confirmButton = chromeDriver.findElement(By.id("btn-login"));
 
         this.emailInput =  emailInput;
 

@@ -73,7 +73,7 @@ public class CheckThreadable extends Thread {
 
                 // notification
 
-                Image image = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("/com/com.robert/resources/images/goodlife-logo.png"));
+                Image image = Toolkit.getDefaultToolkit().createImage(this.getClass().getResource("/com/robert/resources/images/goodlife-logo.png"));
 
                 TrayIcon trayIcon = new TrayIcon(image);
 
