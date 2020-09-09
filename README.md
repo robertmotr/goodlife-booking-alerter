@@ -19,6 +19,6 @@ GBA also uses chrome which is packaged into the JAR as chromedriver.exe. Upon JA
 
 TO-DO:
 
-- Instead of freezing the Controller while the webdriver loads the page, implement a separate thread for the driver so that the Controller does not hang while it loads.
+- ~~Instead of freezing the Controller while the webdriver loads the page, implement a separate thread for the driver so that the Controller does not hang while it loads.~~
 - ~~Restructure package access so that everything fits under com.robert~~
  
