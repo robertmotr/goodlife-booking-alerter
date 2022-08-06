@@ -4,7 +4,7 @@ Goodlife Booking Alerter is an automated bot that will check Goodlife Fitness fo
 In order to use GBA, your account must first be logged in within the program. At the moment, GBA will only alert you for one time slot, not multiple.
 
 NOTICE:
-GBA is no longer working due to the fact that I've long abandoned progress on the project, as Goodlife Fitness is now closed due to COVID.
+GBA is no longer working due to the fact that Goodlife Fitness has abandoned their booking system as the COVID lockdowns are no longer in effect.
 If you'd like to take the source and make your own version of GBA, feel free to fork the project and do so yourself.
 
 Notes:
