@@ -1,7 +1,7 @@
 # goodlife-booking-alerter
 
 ### NOTICE:
-GBA is no longer working as Goodlife Fitness has abandoned their booking system since COVID lockdowns have ended. Because of this, running this program will no longer work as expected. I'm keeping this here to archive my very first "big" programming project that I've worked on.
+GBA is no longer working as Goodlife Fitness has abandoned their booking system since COVID lockdowns have ended. Because of this, running this program will no longer work as expected. I'm keeping this repo alive to archive my very first "big" programming project that I've worked on.
 
 
 Goodlife Booking Alerter is a bot that will check Goodlife Fitness for booking time slots and whether they are available or not. 
